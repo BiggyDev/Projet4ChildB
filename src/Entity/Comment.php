@@ -41,6 +41,16 @@ class Comment
      */
     private $score;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="comment")
+     */
+    private $client;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Provider", inversedBy="comment")
+     */
+    private $provider;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,6 +88,30 @@ class Comment
     public function setScore(int $score): self
     {
         $this->score = $score;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getProvider(): ?Provider
+    {
+        return $this->provider;
+    }
+
+    public function setProvider(?Provider $provider): self
+    {
+        $this->provider = $provider;
 
         return $this;
     }

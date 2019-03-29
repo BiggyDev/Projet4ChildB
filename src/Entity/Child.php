@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -54,6 +56,27 @@ class Child
      * @ORM\Column(type="text")
      */
     private $info;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Contact", mappedBy="child")
+     */
+    private $contacts;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="children")
+     */
+    private $client;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Provider", mappedBy="child")
+     */
+    private $providers;
+
+    public function __construct()
+    {
+        $this->contacts = new ArrayCollection();
+        $this->providers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -116,6 +139,74 @@ class Child
     public function setInfo(string $info): self
     {
         $this->info = $info;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contact[]
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts[] = $contact;
+            $contact->addChild($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): self
+    {
+        if ($this->contacts->contains($contact)) {
+            $this->contacts->removeElement($contact);
+            $contact->removeChild($this);
+        }
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Provider[]
+     */
+    public function getProviders(): Collection
+    {
+        return $this->providers;
+    }
+
+    public function addProvider(Provider $provider): self
+    {
+        if (!$this->providers->contains($provider)) {
+            $this->providers[] = $provider;
+            $provider->addChild($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProvider(Provider $provider): self
+    {
+        if ($this->providers->contains($provider)) {
+            $this->providers->removeElement($provider);
+            $provider->removeChild($this);
+        }
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Location;
 
@@ -111,6 +113,22 @@ class Client
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $localisation;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Child", mappedBy="client")
+     */
+    private $children;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="client")
+     */
+    private $comment;
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+        $this->comment = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -269,6 +287,68 @@ class Client
     public function setLocalisation(?string $localisation): self
     {
         $this->localisation = $localisation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Child[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(Child $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Child $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            // set the owning side to null (unless already changed)
+            if ($child->getClient() === $this) {
+                $child->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComment(): Collection
+    {
+        return $this->comment;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comment->contains($comment)) {
+            $this->comment[] = $comment;
+            $comment->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comment->contains($comment)) {
+            $this->comment->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getClient() === $this) {
+                $comment->setClient(null);
+            }
+        }
 
         return $this;
     }

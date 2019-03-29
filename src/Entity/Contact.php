@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class Contact
      */
     private $relation;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Child", inversedBy="contacts")
+     */
+    private $child;
+
+    public function __construct()
+    {
+        $this->child = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,6 +90,32 @@ class Contact
     public function setRelation(?string $relation): self
     {
         $this->relation = $relation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Child[]
+     */
+    public function getChild(): Collection
+    {
+        return $this->child;
+    }
+
+    public function addChild(Child $child): self
+    {
+        if (!$this->child->contains($child)) {
+            $this->child[] = $child;
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Child $child): self
+    {
+        if ($this->child->contains($child)) {
+            $this->child->removeElement($child);
+        }
 
         return $this;
     }

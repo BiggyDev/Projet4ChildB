@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -124,6 +126,22 @@ class Provider
      * @ORM\Column(type="integer", nullable=true)
      */
     private $siret;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="provider")
+     */
+    private $comment;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Child", inversedBy="providers")
+     */
+    private $child;
+
+    public function __construct()
+    {
+        $this->comment = new ArrayCollection();
+        $this->child = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -330,6 +348,63 @@ class Provider
     public function setSiret(?int $siret): self
     {
         $this->siret = $siret;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComment(): Collection
+    {
+        return $this->comment;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comment->contains($comment)) {
+            $this->comment[] = $comment;
+            $comment->setProvider($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comment->contains($comment)) {
+            $this->comment->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getProvider() === $this) {
+                $comment->setProvider(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Child[]
+     */
+    public function getChild(): Collection
+    {
+        return $this->child;
+    }
+
+    public function addChild(Child $child): self
+    {
+        if (!$this->child->contains($child)) {
+            $this->child[] = $child;
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Child $child): self
+    {
+        if ($this->child->contains($child)) {
+            $this->child->removeElement($child);
+        }
 
         return $this;
     }
