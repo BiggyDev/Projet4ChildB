@@ -87,13 +87,6 @@ class Client
     private $phone;
 
     /**
-     * @var string Status of the client (User/Admin).
-     *
-     * @ORM\Column(type="string", length=20)
-     */
-    private $status;
-
-    /**
      * @var string The gender of the client.
      *
      * @ORM\Column(type="string", length=20)
@@ -110,9 +103,9 @@ class Client
     /**
      * @var Location The localisation of the client.
      *
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
-    private $localisation;
+    private $localisation = [];
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Child", mappedBy="client")
@@ -243,18 +236,6 @@ class Client
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getGender(): ?string
     {
         return $this->gender;
@@ -275,18 +256,6 @@ class Client
     public function setAge(int $age): self
     {
         $this->age = $age;
-
-        return $this;
-    }
-
-    public function getLocalisation(): ?string
-    {
-        return $this->localisation;
-    }
-
-    public function setLocalisation(?string $localisation): self
-    {
-        $this->localisation = $localisation;
 
         return $this;
     }

@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Location;
 
 /**
  * @ApiResource()
@@ -72,13 +73,6 @@ class Provider
     private $updated_at;
 
     /**
-     * @var array Qualifications of the provider.
-     *
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $qualification = [];
-
-    /**
      * @var int Phone number of the provider.
      *
      * @ORM\Column(type="integer", nullable=true)
@@ -86,43 +80,36 @@ class Provider
     private $phone;
 
     /**
-     * @
+     * @var string The status of the provider.
      *
      * @ORM\Column(type="string", length=20)
      */
     private $status;
 
     /**
+     * @var string The gender of the provider.
+     *
      * @ORM\Column(type="string", length=20)
      */
     private $gender;
 
     /**
+     * @var int The age of the provider.
+     *
      * @ORM\Column(type="integer")
      */
     private $age;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $localisation;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $available;
-
-    /**
+     * @var float The price of the provider.
+     *
      * @ORM\Column(type="decimal", precision=4, scale=2)
      */
     private $price;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $schedule;
-
-    /**
+     * @var int The siret number of the provider.
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private $siret;
@@ -136,6 +123,27 @@ class Provider
      * @ORM\ManyToMany(targetEntity="App\Entity\Child", inversedBy="providers")
      */
     private $child;
+
+    /**
+     * @var array The schedule of the provider.
+     *
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $schedule = [];
+
+    /**
+     * @var array The qualifications of the provider.
+     *
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $qualification = [];
+
+    /**
+     * @var Location The localisation of the provider.
+     *
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $localisation = [];
 
     public function __construct()
     {
@@ -232,18 +240,6 @@ class Provider
         return $this;
     }
 
-    public function getQualification(): ?array
-    {
-        return $this->qualification;
-    }
-
-    public function setQualification(?array $qualification): self
-    {
-        $this->qualification = $qualification;
-
-        return $this;
-    }
-
     public function getPhone(): ?int
     {
         return $this->phone;
@@ -292,30 +288,6 @@ class Provider
         return $this;
     }
 
-    public function getLocalisation(): ?string
-    {
-        return $this->localisation;
-    }
-
-    public function setLocalisation(?string $localisation): self
-    {
-        $this->localisation = $localisation;
-
-        return $this;
-    }
-
-    public function getAvailable(): ?string
-    {
-        return $this->available;
-    }
-
-    public function setAvailable(string $available): self
-    {
-        $this->available = $available;
-
-        return $this;
-    }
-
     public function getPrice()
     {
         return $this->price;
@@ -324,18 +296,6 @@ class Provider
     public function setPrice($price): self
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getSchedule(): ?string
-    {
-        return $this->schedule;
-    }
-
-    public function setSchedule(string $schedule): self
-    {
-        $this->schedule = $schedule;
 
         return $this;
     }
