@@ -3336,10 +3336,7 @@
                     "Symfony\\Bundle\\MakerBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
+
             "authors": [
                 {
                     "name": "Symfony Community",
