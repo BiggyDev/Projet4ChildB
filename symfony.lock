@@ -244,12 +244,9 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
-<<<<<<< HEAD
-=======
     "symfony/orm-pack": {
         "version": "v1.0.6"
     },
->>>>>>> 23bf484af345392f9fa29f982b15a208e5f2f57d
     "symfony/polyfill-mbstring": {
         "version": "v1.10.0"
     },
