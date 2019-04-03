@@ -35,7 +35,7 @@ class CalendarListener
         // Modify the query to fit to your entity and needs
         // Change booking.beginAt by your start date property
         $bookings = $this->clientRepository
-            ->createQueryBuilder('booking')
+            ->createQueryBuilder('client')
             ->where('booking.beginAt BETWEEN :start and :end')
             ->setParameter('start', $start->format('Y-m-d H:i:s'))
             ->setParameter('end', $end->format('Y-m-d H:i:s'))
