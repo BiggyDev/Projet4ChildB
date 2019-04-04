@@ -305,7 +305,6 @@ class Client
             $this->comment[] = $comment;
             $comment->setClient($this);
         }
-
         return $this;
     }
 
