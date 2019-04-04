@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 class ProviderController extends AbstractController
 {
@@ -16,4 +17,5 @@ class ProviderController extends AbstractController
             'controller_name' => 'ProviderController',
         ]);
     }
+
 }
