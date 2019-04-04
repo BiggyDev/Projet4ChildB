@@ -321,4 +321,9 @@ class Client
 
         return $this;
     }
+
+    public function profilClient()
+    {
+        $profil = $this->getDoctrine
+    }
 }
