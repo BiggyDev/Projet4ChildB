@@ -18,12 +18,12 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/api/{id}", name="profil_show")
+     * @Route("/profil/showclient/{id}", name="profil_show")
      */
     public function showProfilClient()
     {
 //        $profil = $this->getDoctrine();
-        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $this->getEntityManager();
     }
 //
 //    /**

@@ -11,8 +11,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Client|null findOneBy(array $criteria, array $orderBy = null)
  * @method Client[]    findAll()
  * @method Client[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- *
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ProfilClientRepository")
  */
 class ClientRepository extends ServiceEntityRepository
 {

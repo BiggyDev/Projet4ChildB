@@ -11,6 +11,7 @@ use phpDocumentor\Reflection\Location;
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProfilClientRepository")
  */
 class Client
 {
@@ -322,8 +323,9 @@ class Client
         return $this;
     }
 
-    public function profilClient()
-    {
-        $profil = $this->getDoctrine
-    }
+//    public function profilClient()
+//    {
+//        $profil = $this->getDoctrine()
+//            ->
+//    }
 }

@@ -11,7 +11,7 @@ namespace App\Repository;
 
 use App\Entity\Client;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\EntityManager
+use Doctrine\ORM\EntityManager;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -28,21 +28,15 @@ class ProfilClientRepository extends ServiceEntityRepository
         parent::__construct($registry, Client::class);
     }
 
-    public function getInfoProfilClient()
+    public function getInfoProfilClient($id)
     {
+
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('*')
             ->from('client','toto')
             ->where('id =?1')
             ->setParameter(1,$id);
         return $qb->getQuery()->getArrayResult();
-
-//        $qb = $this->getEntityManager()->createQueryBuilder();
-//        $qb->select('disease_id','toto')
-//            ->from('disease_child','toto')
-//            ->where('child_id =?1')
-//            ->setParameter(1,$id);
-//        return $qb->getQuery()->getArrayResult();
     }
 
 }
