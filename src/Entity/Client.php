@@ -7,12 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Location;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ApiResource()
+ * @ORM\Table(name="client")
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  */
-class Client
+class Client implements UserInterface
 {
     /**
      * @var int The id of the client.
@@ -26,14 +28,14 @@ class Client
     /**
      * @var string The name of the client.
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string The last name of the client.
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
@@ -42,7 +44,7 @@ class Client
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private $username;
 
     /**
      * @var string The password of the client.
@@ -61,7 +63,7 @@ class Client
     /**
      * @var \DateTimeInterface Date of registration of the client.
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $created_at;
 
@@ -89,14 +91,14 @@ class Client
     /**
      * @var string The gender of the client.
      *
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $gender;
 
     /**
      * @var int The age of the client
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $age;
 
@@ -117,10 +119,11 @@ class Client
      */
     private $comment;
 
-    public function __construct()
+    public function __construct($username)
     {
         $this->children = new ArrayCollection();
         $this->comment = new ArrayCollection();
+        $this->username = $username;
     }
 
     public function getId(): ?int
@@ -152,16 +155,9 @@ class Client
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getUsername(): ?string
     {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
+        return $this->username;
     }
 
     public function getPassword(): ?string
@@ -258,6 +254,20 @@ class Client
         $this->age = $age;
 
         return $this;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function eraseCredentials()
+    {
     }
 
     /**

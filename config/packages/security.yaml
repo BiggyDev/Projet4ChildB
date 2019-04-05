@@ -1,13 +1,13 @@
 security:
     encoders:
-        App\Entity\User:
+        App\Entity\Client:
             algorithm: bcrypt
             cost: 12
 
     providers:
         entity_provider:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Client
                 property: username
 
     firewalls:
@@ -15,6 +15,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
             stateless: true
+
         login:
             pattern:  ^/login
             stateless: true
@@ -36,9 +37,9 @@ security:
             provider: entity_provider
             guard:
                 authenticators:
-                - lexik_jwt_authentication.jwt_token_authenticator
+                    - lexik_jwt_authentication.jwt_token_authenticator
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
