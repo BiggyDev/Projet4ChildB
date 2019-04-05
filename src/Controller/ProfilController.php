@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Repository\ProfilClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class ProfilController extends AbstractController
@@ -25,9 +28,12 @@ class ProfilController extends AbstractController
      */
     public function showProfilClient($id)
     {
-        $profil = $this->getDoctrine()
+        $profilClient = new Client();
+          $profil = $this->getDoctrine()
             ->getRepository(Client::class)
             ->find($id);
+
+//        $profil = $profilClientRepository->getInfoProfilClient($id);
 
         if (!$profil) {
             throw $this->createNotFoundException(
@@ -35,7 +41,18 @@ class ProfilController extends AbstractController
             );
         }
 
-        return $profil;
+        $response = new JsonResponse($profil);
+        $response = new Response(json_encode($profil));
+        $response->headers->set('Content-Type', 'application/json');
+//        $response->setData([
+//            'name' => $profil
+//        ]);
+
+        return $this->render('profil/index.html.twig', [
+            'name' => dump($profil),
+        ]);
+//        return dump($response);
+
     }
 //
 //    /**

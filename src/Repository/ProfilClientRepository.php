@@ -30,10 +30,9 @@ class ProfilClientRepository extends ServiceEntityRepository
 
     public function getInfoProfilClient($id)
     {
-
         $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('*')
-            ->from('client','toto')
+        $qb->select('name')
+            ->from('client', 'u')
             ->where('id =?1')
             ->setParameter(1,$id);
         return $qb->getQuery()->getArrayResult();
