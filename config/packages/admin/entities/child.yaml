@@ -1,0 +1,13 @@
+easy_admin:
+  entities:
+    Child:
+      class: App\Entity\Child
+      list:
+        fields:
+          - { property: 'id', label: 'ID Enfant', type: 'integer' }
+          - { property: 'client_id', label: 'ID Parent', type: 'integer' }
+          - { property: 'name', label: 'Prenom', type: 'string' }
+          - { property: 'lastname', label: 'Nom', type: 'string' }
+          - { property: 'age', label: 'Age', type: 'integer' }
+          - { property: 'info', label: 'Info', type: 'string' }
+          - { property: 'gender', label: 'Genre', type: 'string' }

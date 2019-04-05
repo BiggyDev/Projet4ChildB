@@ -1,0 +1,18 @@
+easy_admin:
+  entities:
+    Client:
+      class: App\Entity\Client
+      list:
+        fields:
+          - { property: 'id', label: 'ID Client', type: 'integer' }
+          - { property: 'name', label: 'prenom', type: 'string' }
+          - { property: 'lastname', label: 'Nom', type: 'string' }
+          - { property: 'email', label: 'mail', type: 'string' }
+          - { property: 'password', label: 'mdp', type: 'string' }
+          - { property: 'created_at', label: 'Creation', type: 'date' }
+          - { property: 'updated_at', label: 'Modification', type: 'date' }
+          - { property: 'description', label: 'Description', type: 'string' }
+          - { property: 'phone', label: 'Modification', type: 'integer' }
+          - { property: 'gender', label: 'Genre', type: 'string' }
+          - { property: 'age', label: 'Age', type: 'integer' }
+          - { property: 'localisation', label: 'Localisation', type: 'string' }

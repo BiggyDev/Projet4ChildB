@@ -1,0 +1,11 @@
+easy_admin:
+  design:
+    menu:
+      - label: 'Particulier'
+        children:
+          - { entity: 'Client', label: Parent}
+          - { entity: 'Child', label: Enfant}
+          - { entity: 'Contact', label: Contact}
+      - label: 'Professionnel'
+        children:
+          - { entity: 'Provider', label: Pro}
