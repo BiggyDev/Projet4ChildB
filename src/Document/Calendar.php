@@ -19,20 +19,32 @@ class Calendar
     private $id;
 
     /**
-     * @ODM\Field
+     * @ODM\Field(type="datetime")
+     * @Assert\DateTime
      */
-    public $description;
+    public $begin_hour;
 
     /**
-     * @ODM\Field(type="float")
+     * @ODM\Field(type="datetime")
+     * @Assert\DateTime
+     */
+    public $end_hour;
+
+    /**
+     * @ODM\Field(type="integer")
      * @Assert\NotBlank
-     * @Assert\Range(min=0, minMessage="The price must be superior to 0.")
-     * @Assert\Type(type="float")
      */
-    public $price;
+    public $available_places;
 
     /**
-     * @ODM\ReferenceOne(targetDocument=Product::class, inversedBy="offers", storeAs="id")
+     * @ODM\Field(type="boolean")
+     * @Assert\NotBlank
      */
-    public $product;
+    public $daily;
+
+    /**
+     * @ODM\Field(type="boolean")
+     * @Assert\NotBlank
+     */
+    public $weekly;
 }
