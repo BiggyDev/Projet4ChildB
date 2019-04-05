@@ -1,0 +1,7 @@
+easy_admin:
+    entities:
+      - App\Entity\Child
+      - App\Entity\Client
+      - App\Entity\Comment
+      - App\Entity\Contact
+      - App\Entity\Provider
