@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 
 class ProfilController extends AbstractController
 {
@@ -18,12 +21,21 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil/showclient/{id}", name="profil_show")
+     * @Route("/profil/{id}", name="profil_show")
      */
-    public function showProfilClient()
+    public function showProfilClient($id)
     {
-//        $profil = $this->getDoctrine();
-        $entityManager = $this->getEntityManager();
+        $profil = $this->getDoctrine()
+            ->getRepository(Client::class)
+            ->find($id);
+
+        if (!$profil) {
+            throw $this->createNotFoundException(
+                'Aucun profil trouvé pour cet id : '.$id
+            );
+        }
+
+        return $profil;
     }
 //
 //    /**
