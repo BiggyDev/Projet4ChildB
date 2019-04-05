@@ -13,6 +13,7 @@ use App\Entity\Client;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use phpDocumentor\Reflection\DocBlock\Description;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -36,6 +37,11 @@ class ProfilClientRepository extends ServiceEntityRepository
             ->where('id =?1')
             ->setParameter(1,$id);
         return $qb->getQuery()->getArrayResult();
+    }
+
+    public function modifyInfoProfilClient($name, $lastname, $email, $password, $description, $phone, $age, $localisation)
+    {
+        
     }
 
 }

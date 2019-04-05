@@ -50,6 +50,10 @@ class ProfilController extends AbstractController
 //        ]);
     }
 
+    public function modifyProfilClient()
+    {
+
+    }
 //
 //    /**
 //     * @Route("/profil", name="profil")
