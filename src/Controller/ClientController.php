@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
 
 class ClientController extends AbstractController
 {
-
     private $passwordEncoder;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
@@ -18,7 +19,8 @@ class ClientController extends AbstractController
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    private function generateRandomString($length) {
+    private function generateRandomString($length)
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -28,23 +30,39 @@ class ClientController extends AbstractController
         return $randomString;
     }
 
-    public function register(Request $request, UserPasswordEncoderInterface $encoder)
+    private function generateInstantDate()
     {
-        $em = $this->getDoctrine()->getManager();
+        $datetime = new \DateTime(date('Y/m/d'));
 
-        $username = $request->request->get('_username');
-        $password = $request->request->get('_password');
+        return $datetime;
+    }
 
-        $client = new Client($username);
-        $client->setPassword($encoder->encodePassword($client, $password));
+    /**
+     * @Route("/register/{email}/{password}", name="register")
+     * @param $email
+     * @param $password
+     * @return Response
+     */
+    public function register($email, $password)
+    {
+        // you can fetch the EntityManager via $this->getDoctrine()
+        // or you can add an argument to your action: index(EntityManagerInterface $entityManager)
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $client = new Client();
+        $client->setEmail($email);
+        $client->setPassword($this->passwordEncoder->encodePassword($client, $password));
         $client->setToken($this->generateRandomString(255));
+        $client->setCreatedAt($this->generateInstantDate());
 
-        $em->persist($client);
-        $em->flush();
-        return new Response(sprintf('Client %s successfully created', $client->getUsername()));
+        // tell Doctrine you want to (eventually) save the Product (no queries yet)
+        $entityManager->persist($client);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+        return new Response('Saved new client with id '.$client->getId());
     }
-    public function api()
-    {
-        return new Response(sprintf('Logged in as %s', $this->getUser()->getUsername()));
-    }
+
+
 }
