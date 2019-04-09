@@ -50,98 +50,30 @@ class ProfilController extends AbstractController
 //        ]);
     }
 
-    public function modifyProfilClient()
+    /**
+     * @Route("/profil/edit/{id}", name="profil_edit")
+     */
+    public function modifyProfilClient($id, $name, $lastname, $description, $phone, $age)
     {
 
+        $entityManager = $this->getDoctrine()->getManager();
+        $client = $entityManager->getRepository(Client::class)->find($id);
+
+        if (!$client) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+
+        $client->setName($name);
+        $client->setLastname($lastname);
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('profil_edit', [
+            'id' => $product->getId()
+        ]);
+
     }
-//
-//    /**
-//     * @Route("/profil", name="profil")
-//     */
-//    public function showProfilProvider()
-//    {
-//        return $this->render('profil/index.html.twig', [
-//            'controller_name' => 'ProfilController',
-//        ]);
-//    }
-//
-//    /**
-//     * @Route("/profil", name="profil")
-//     */
-//    public function modifyProfilClient()
-//    {
-//        return $this->render('profil/index.html.twig', [
-//            'controller_name' => 'ProfilController',
-//        ]);
-//    }
-//    /**
-//     * @Route("/profil", name="profil")
-//     */
-//    public function modifyProfilClient()
-//    {
-//        return $this->render('profil/index.html.twig', [
-//            'controller_name' => 'ProfilController',
-//        ]);
-//    }
-//
-//    /**
-//     * @Route("/profil", name="profil")
-//     */
-//    public function modifyProfilClient()
-//    {
-//        return $this->render('profil/index.html.twig', [
-//            'controller_name' => 'ProfilController',
-//        ]);
-//    }
-//
-//    /**
-//     * @Route("/profil", name="profil")
-//     */
-//    public function modifyProfilClient()
-//    {
-//        return $this->render('profil/index.html.twig', [
-//            'controller_name' => 'ProfilController',
-//        ]);
-//    }
-//
-//    /**
-//     * @Route("/profil", name="profil")
-//     */
-//    public function modifyProfilClient()
-//    {
-//        return $this->render('profil/index.html.twig', [
-//            'controller_name' => 'ProfilController',
-//        ]);
-//    }
-//
-//    /**
-//     * @Route("/profil", name="profil")
-//     */
-//    public function modifyProfilClient()
-//    {
-//        return $this->render('profil/index.html.twig', [
-//            'controller_name' => 'ProfilController',
-//        ]);
-//    }
-//
-//    /**
-//     * @Route("/profil", name="profil")
-//     */
-//    public function modifyProfilClient()
-//    {
-//        return $this->render('profil/index.html.twig', [
-//            'controller_name' => 'ProfilController',
-//        ]);
-//    }
-//
-//    /**
-//     * @Route("/profil", name="profil")
-//     */
-//    public function modifyProfilClient()
-//    {
-//        return $this->render('profil/index.html.twig', [
-//            'controller_name' => 'ProfilController',
-//        ]);
-//    }
 
 }

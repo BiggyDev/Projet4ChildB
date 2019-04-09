@@ -39,9 +39,23 @@ class ProfilClientRepository extends ServiceEntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function modifyInfoProfilClient($name, $lastname, $email, $password, $description, $phone, $age, $localisation)
+    public function modifyInfoProfilClient($id, $name, $lastname, $email, $password, $description, $phone, $age, $localisation)
     {
-        
+        $entityManager = $this->getDoctrine()->getManager();
+        $product = $entityManager->getRepository(Client::class)->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+
+        $product->setName('New product name!');
+        $entityManager->flush();
+
+        return $this->redirectToRoute('product_show', [
+            'id' => $product->getId()
+        ]);
     }
 
 }
