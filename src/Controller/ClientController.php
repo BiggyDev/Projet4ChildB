@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 class ClientController extends AbstractController
@@ -38,15 +39,13 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/register/{email}/{password}", name="register")
+     * @Route("clients/register/{email}/{password}", name="register")
      * @param $email
      * @param $password
      * @return Response
      */
     public function register($email, $password)
     {
-        // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to your action: index(EntityManagerInterface $entityManager)
         $entityManager = $this->getDoctrine()->getManager();
 
         $client = new Client();
@@ -55,13 +54,21 @@ class ClientController extends AbstractController
         $client->setToken($this->generateRandomString(255));
         $client->setCreatedAt($this->generateInstantDate());
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($client);
-
-        // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
         return new Response('Saved new client with id '.$client->getId());
+    }
+
+    public function login(AuthenticationUtils $authenticationUtils)
+    {
+//        // get the login error if there is one
+//        $error = $authenticationUtils->getLastAuthenticationError();
+//        // last username entered by the user
+//        $lastUsername = $authenticationUtils->getLastUsername();
+//        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+
+
     }
 
 
