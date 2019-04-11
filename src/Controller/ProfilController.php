@@ -124,9 +124,26 @@ class ProfilController extends AbstractController
 
         $entityManager->flush();
 
-
         return new Response('Profile edited for client id'. $client->getId());
     }
 
+    /**
+     * @Route("clients/profil/child/delete/{id}", name="child_delete")
+     */
+    public function deleteChildClient($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $child = $entityManager->getRepository(Child::class)->find($id);
+
+        if (!$child) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+
+        $entityManager->remove($child);
+        $entityManager->flush();
+
+    }
 
 }
