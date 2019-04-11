@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Entity\Child;
 use App\Repository\ClientRepository;
 use App\Repository\ProfilClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -74,9 +75,58 @@ class ProfilController extends AbstractController
         $client->setAge($age);
         $client->setGender($gender);
 
-        $entityManager->persist($client);
         $entityManager->flush();
 
         return new Response('Profile edited for client id'. $client->getId());
     }
+
+    /**
+     * @Route("clients/profil/child/create/{id}", name="child_creation")
+     */
+    public function createChildClient($id, $name, $lastname, $info, $age, $gender)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $child = new Child();
+        $child->setName($name);
+        $child->setLastname($lastname);
+        $child->setInfo($info);
+        $child->setGender($gender);
+        $child->setAge($age);
+
+        $entityManager->persist($child);
+
+        $entityManager->flush();
+
+        return new Response('Saved new child with id '.$child->getId());
+    }
+
+    /**
+     * @Route("clients/profil/child/create/{id}", name="child_creation")
+     */
+    public function modifyChildClient($id, $name, $lastname, $info, $age, $gender)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $client = $entityManager->getRepository(Client::class)->find($id);
+
+        if (!$client) {
+            throw $this->createNotFoundException(
+                'No client found for id '.$id
+            );
+        }
+
+        $child = new Child();
+        $child->setName($name);
+        $child->setLastname($lastname);
+        $child->setInfo($info);
+        $child->setGender($gender);
+        $child->setAge($age);
+
+        $entityManager->flush();
+
+
+        return new Response('Profile edited for client id'. $client->getId());
+    }
+
+
 }
