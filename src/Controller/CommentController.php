@@ -8,7 +8,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommentController extends AbstractController
 {
+    /**
+     * @Route("/comment", name="comment")
+     */
+    public function index()
+    {
+        return $this->render('comment/index.html.twig', [
+            'controller_name' => 'CommentController',
+        ]);
+    }
 
+    /**
+     * @Route("/comment/create/{provider_id}/{id}", name="new_comment_provider")
+     */
     public function postCommentProvider($id, $idClient, $idProvider, $title, $article, $score)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -32,6 +44,9 @@ class CommentController extends AbstractController
         return new Response('Comment sent'. $comment->getId());
     }
 
+    /**
+     * @Route("/comment/edit/{provider_id}/{id}", name="comment_provider_edit")
+     */
     public function modifyCommentProvider($id, $idClient, $idProvider, $title, $article, $score)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -54,6 +69,9 @@ class CommentController extends AbstractController
         return new Response('Comment edited'. $comment->getId());
     }
 
+    /**
+     * @Route("/comment/{provider_id}", name="provider_comment_show")
+     */
     public function showCommentProvider($id, $idProvider)
     {
         $comment = $this_>getDoctrine()
@@ -70,6 +88,9 @@ class CommentController extends AbstractController
         $response->headers->set('Content-Type', 'applicaton/json')
     }
 
+    /**
+     * @Route("/comment/create/{client_id}/{id}", name="new_comment_client")
+     */
     public function postCommentClient($id, $idClient, $idProvider, $title, $article, $score)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -93,6 +114,9 @@ class CommentController extends AbstractController
         return new Response('Comment sent'. $comment->getId());
     }
 
+    /**
+     * @Route("/comment/edit/{client_id}/{id}", name="comment_client_edit")
+     */
     public function modifyCommentClient($id, $idClient, $idProvider, $title, $article, $score)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -114,6 +138,9 @@ class CommentController extends AbstractController
         return new Response('Comment edited'. $comment->getId());
     }
 
+    /**
+     * @Route("/comment/{client_id}", name="client_comment_show")
+     */
     public function showCommentClient($id, $idClient)
     {
         $comment = $this_>getDoctrine()
@@ -148,3 +175,5 @@ class CommentController extends AbstractController
         $entityManager->flush();
     }
 }
+
+
