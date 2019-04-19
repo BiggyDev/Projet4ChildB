@@ -11,5 +11,13 @@ namespace App\Controller;
 
 class NotificationController
 {
-
+    /**
+     * @Route("/notification", name="notification ")
+     */
+    public function index()
+    {
+        return $this->render('notification/index.html.twig', [
+            'controller_name' => 'NotificationController',
+        ]);
+    }
 }
