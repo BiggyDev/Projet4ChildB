@@ -17,7 +17,7 @@ easy_admin:
           - { name: 'new', icon: 'plus', label: false , css_class: 'btn btn-primary' }
       form:
         fields:
-          - { property: 'client_id', label: 'ID Parent' }
+          - { property: 'client', label: 'Parent' }
           - { property: 'name', label: 'Prenom' }
           - { property: 'lastname', label: 'Nom' }
           - { property: 'age', label: 'Age' }

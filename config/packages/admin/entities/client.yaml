@@ -20,17 +20,17 @@ easy_admin:
           - { name: 'edit', icon: 'pencil', label: false ,  css_class: 'btn btn-secondary' }
           - { name: 'delete', icon: 'trash', label: false , css_class: 'btn btn-danger' }
           - { name: 'new', icon: 'plus', label: false , css_class: 'btn btn-primary' }
-        form:
-          fields:
-            - { property: 'name', label: 'prenom'}
-            - { property: 'lastname', label: 'Nom'}
-            - { property: 'email', label: 'mail'}
-            - { property: 'token', label: 'token'}
-            - { property: 'password', label: 'mdp'}
-            - { property: 'created_at', label: 'Creation'}
-            - { property: 'updated_at', label: 'Modification'}
-            - { property: 'description', label: 'Description' }
-            - { property: 'phone', label: 'Telephone' }
-            - { property: 'gender', label: 'Genre' }
-            - { property: 'age', label: 'Age' }
+      form:
+        fields:
+          - { property: 'name', label: 'prenom'}
+          - { property: 'lastname', label: 'Nom'}
+          - { property: 'email', label: 'mail'}
+          - { property: 'token', label: 'token'}
+          - { property: 'password', label: 'mdp'}
+          - { property: 'created_at', label: 'Creation'}
+          - { property: 'updated_at', label: 'Modification'}
+          - { property: 'description', label: 'Description' }
+          - { property: 'phone', label: 'Telephone' }
+          - { property: 'gender', label: 'Genre' }
+          - { property: 'age', label: 'Age' }
 
