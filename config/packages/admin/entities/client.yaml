@@ -4,15 +4,29 @@ easy_admin:
       class: App\Entity\Client
       list:
         fields:
-          - { property: 'id', label: 'ID Client', type: 'integer' }
-          - { property: 'name', label: 'prenom', type: 'string' }
+          - { property: 'id', label: 'ID Parent', type: 'integer' }
+          - { property: 'name', label: 'Prenom', type: 'string' }
           - { property: 'lastname', label: 'Nom', type: 'string' }
-          - { property: 'email', label: 'mail', type: 'string' }
+          - { property: 'email', label: 'Mail', type: 'string' }
           - { property: 'password', label: 'mdp', type: 'string' }
           - { property: 'created_at', label: 'Creation', type: 'date' }
           - { property: 'updated_at', label: 'Modification', type: 'date' }
           - { property: 'description', label: 'Description', type: 'string' }
-          - { property: 'phone', label: 'Modification', type: 'integer' }
+          - { property: 'phone', label: 'Telephone', type: 'sting' }
           - { property: 'gender', label: 'Genre', type: 'string' }
           - { property: 'age', label: 'Age', type: 'integer' }
-          - { property: 'localisation', label: 'Localisation', type: 'string' }
+          - { property: 'child', label: 'ID Enfant', type: 'string'}
+        form:
+          fields:
+            - { property: 'name', label: 'prenom'}
+            - { property: 'lastname', label: 'Nom'}
+            - { property: 'email', label: 'mail'}
+            - { property: 'token', label: 'token'}
+            - { property: 'password', label: 'mdp'}
+            - { property: 'created_at', label: 'Creation'}
+            - { property: 'updated_at', label: 'Modification'}
+            - { property: 'description', label: 'Description' }
+            - { property: 'phone', label: 'Telephone' }
+            - { property: 'gender', label: 'Genre' }
+            - { property: 'age', label: 'Age' }
+

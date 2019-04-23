@@ -11,3 +11,11 @@ easy_admin:
           - { property: 'age', label: 'Age', type: 'integer' }
           - { property: 'info', label: 'Info', type: 'string' }
           - { property: 'gender', label: 'Genre', type: 'string' }
+      form:
+        fields:
+          - { property: 'client_id', label: 'ID Parent' }
+          - { property: 'name', label: 'Prenom' }
+          - { property: 'lastname', label: 'Nom' }
+          - { property: 'age', label: 'Age' }
+          - { property: 'info', label: 'Info' }
+          - { property: 'gender', label: 'Genre' }

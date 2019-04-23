@@ -2,3 +2,16 @@ easy_admin:
   entities:
     Contact:
       class: App\Entity\Contact
+      list:
+        fields:
+          - { property: 'id', label: 'ID Client', type: 'integer' }
+          - { property: 'name', label: 'Nom', type: 'string'}
+          - { property: 'phone', label: 'Telephone', type: 'string' }
+          - { property: 'relation', label: 'Relation', type: 'string' }
+          - { property: 'children_id', label: 'ID Enfant', type: 'string'}
+      form:
+        fields:
+          - { property: 'name', label: 'Nom'}
+          - { property: 'phone', label: 'Telephone'}
+          - { property: 'relation', label: 'Relation' }
+          - { property: 'children_id', label: 'ID Enfant'}

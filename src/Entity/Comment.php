@@ -114,5 +114,12 @@ class Comment
         $this->provider = $provider;
 
         return $this;
+
+
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
