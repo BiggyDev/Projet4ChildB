@@ -39,7 +39,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("clients/register/{email}/{password}", name="register")
+     * @Route("clients/{email}/{password}", name="register")
      * @param $email
      * @param $password
      * @return Response
