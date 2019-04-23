@@ -19,6 +19,10 @@ easy_admin:
           - { property: 'Qualification', label: 'Qualification', type: 'string' }
           - { property: 'location', label: 'Geoloc', type: 'string' }
           - { property: 'schedule', label: 'Disponibilite', type: 'string' }
+        actions:
+          - { name: 'edit', icon: 'pencil', label: false ,  css_class: 'btn btn-secondary' }
+          - { name: 'delete', icon: 'trash', label: false , css_class: 'btn btn-danger' }
+          - { name: 'new', icon: 'plus', label: false , css_class: 'btn btn-primary' }
       form:
         fields:
           - { property: 'name', label: 'Prenom' }

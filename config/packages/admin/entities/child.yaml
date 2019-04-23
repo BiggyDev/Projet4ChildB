@@ -11,6 +11,10 @@ easy_admin:
           - { property: 'age', label: 'Age', type: 'integer' }
           - { property: 'info', label: 'Info', type: 'string' }
           - { property: 'gender', label: 'Genre', type: 'string' }
+        actions:
+          - { name: 'edit', icon: 'pencil', label: false ,  css_class: 'btn btn-secondary' }
+          - { name: 'delete', icon: 'trash', label: false , css_class: 'btn btn-danger' }
+          - { name: 'new', icon: 'plus', label: false , css_class: 'btn btn-primary' }
       form:
         fields:
           - { property: 'client_id', label: 'ID Parent' }
