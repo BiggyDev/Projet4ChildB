@@ -1,4 +1,7 @@
 {
+    "alcaeus/mongo-php-adapter": {
+        "version": "1.1.6"
+    },
     "api-platform/api-pack": {
         "version": "v1.2.0"
     },
@@ -101,6 +104,23 @@
     "doctrine/migrations": {
         "version": "v2.0.0"
     },
+    "doctrine/mongodb-odm": {
+        "version": "2.0.0-beta1"
+    },
+    "doctrine/mongodb-odm-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "1fd8598bf42227a1c8905edd32f640e4c5d15eff"
+        },
+        "files": [
+            "./config/packages/doctrine_mongodb.yaml",
+            "./config/packages/prod/doctrine_mongodb.yaml",
+            "./src/Document/.gitignore"
+        ]
+    },
     "doctrine/orm": {
         "version": "v2.6.3"
     },
@@ -116,6 +136,8 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "mongodb/mongodb": {
+        "version": "1.4.2"
     "lcobucci/jwt": {
         "version": "3.2.5"
     },
@@ -277,6 +299,9 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/options-resolver": {
+        "version": "v4.2.5"
+    },
     "symfony/orm-pack": {
         "version": "v1.0.6"
     },
@@ -373,7 +398,11 @@
         ]
     },
     "symfony/var-dumper": {
+<<<<<<< HEAD
+        "version": "v4.2.5"
+=======
         "version": "v4.2.4"
+>>>>>>> develop
     },
     "symfony/var-exporter": {
         "version": "v4.2.4"

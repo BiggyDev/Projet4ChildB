@@ -127,11 +127,11 @@ class Provider implements UserInterface
     private $child;
 
     /**
-     * @var array The schedule of the provider.
+     * @var string The file name of the schedule of the provider.
      *
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="string")
      */
-    private $schedule = [];
+    private $schedule;
 
     /**
      * @var array The qualifications of the provider.
@@ -310,6 +310,18 @@ class Provider implements UserInterface
     public function setSiret(?int $siret): self
     {
         $this->siret = $siret;
+
+        return $this;
+    }
+
+    public function getSchedule(): ?string
+    {
+        return $this->schedule;
+    }
+
+    public function setSchedule(?string $schedule): self
+    {
+        $this->siret = $schedule;
 
         return $this;
     }

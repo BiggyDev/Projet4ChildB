@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 
 class ProviderController extends AbstractController
 {
@@ -58,4 +58,5 @@ class ProviderController extends AbstractController
 
         return new Response('Saved new provider with id '.$provider->getId());
     }
+
 }
