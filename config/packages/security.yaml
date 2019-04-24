@@ -3,12 +3,15 @@ security:
         App\Entity\Client:
             algorithm: bcrypt
             cost: 12
+        App\Entity\Provider:
+            algorithm: bcrypt
+            cost: 12
 
     providers:
         entity_provider:
             entity:
                 class: App\Entity\Client
-                property: username
+                property: email
 
     firewalls:
         dev:

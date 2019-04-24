@@ -20,7 +20,7 @@ class Client implements UserInterface
      * @var int The id of the client.
      *
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -44,7 +44,7 @@ class Client implements UserInterface
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $username;
+    private $email;
 
     /**
      * @var string The password of the client.
@@ -119,11 +119,10 @@ class Client implements UserInterface
      */
     private $comment;
 
-    public function __construct($username)
+    public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->comment = new ArrayCollection();
-        $this->username = $username;
     }
 
     public function getId(): ?int
@@ -155,9 +154,16 @@ class Client implements UserInterface
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getEmail(): ?string
     {
-        return $this->username;
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 
     public function getPassword(): ?string
@@ -256,20 +262,6 @@ class Client implements UserInterface
         return $this;
     }
 
-    public function getSalt()
-    {
-        return null;
-    }
-
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
     /**
      * @return Collection|Child[]
      */
@@ -330,5 +322,37 @@ class Client implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+
     }
 }
