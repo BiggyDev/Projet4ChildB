@@ -307,7 +307,6 @@ class Client implements UserInterface
             $this->comment[] = $comment;
             $comment->setClient($this);
         }
-
         return $this;
     }
 
