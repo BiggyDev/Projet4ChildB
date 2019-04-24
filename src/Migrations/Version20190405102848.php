@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190401071639 extends AbstractMigration
+final class Version20190405102848 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -29,6 +29,12 @@ final class Version20190401071639 extends AbstractMigration
         $this->addSql('INSERT INTO child (id, client_id, name, lastname, age, info, gender) SELECT id, client_id, name, lastname, age, info, gender FROM __temp__child');
         $this->addSql('DROP TABLE __temp__child');
         $this->addSql('CREATE INDEX IDX_22B3542919EB6921 ON child (client_id)');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__client AS SELECT id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation FROM client');
+        $this->addSql('DROP TABLE client');
+        $this->addSql('CREATE TABLE client (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, email VARCHAR(255) NOT NULL COLLATE BINARY, password VARCHAR(255) NOT NULL COLLATE BINARY, token VARCHAR(255) NOT NULL COLLATE BINARY, updated_at DATETIME DEFAULT NULL, description CLOB DEFAULT NULL COLLATE BINARY, phone INTEGER DEFAULT NULL, localisation CLOB DEFAULT NULL COLLATE BINARY --(DC2Type:json)
+        , name VARCHAR(255) DEFAULT NULL, lastname VARCHAR(255) DEFAULT NULL, created_at DATETIME DEFAULT NULL, gender VARCHAR(20) DEFAULT NULL, age INTEGER DEFAULT NULL)');
+        $this->addSql('INSERT INTO client (id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation) SELECT id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation FROM __temp__client');
+        $this->addSql('DROP TABLE __temp__client');
         $this->addSql('DROP INDEX IDX_9474526CA53A8AA');
         $this->addSql('DROP INDEX IDX_9474526C19EB6921');
         $this->addSql('CREATE TEMPORARY TABLE __temp__comment AS SELECT id, client_id, provider_id, title, article, score FROM comment');
@@ -47,14 +53,6 @@ final class Version20190401071639 extends AbstractMigration
         $this->addSql('DROP TABLE __temp__contact_child');
         $this->addSql('CREATE INDEX IDX_F994426DD62C21B ON contact_child (child_id)');
         $this->addSql('CREATE INDEX IDX_F994426E7A1254A ON contact_child (contact_id)');
-        $this->addSql('CREATE TEMPORARY TABLE __temp__provider AS SELECT id, name, lastname, email, password, token, created_at, updated_at, qualification, phone, status, gender, age, localisation, price, schedule, siret FROM provider');
-        $this->addSql('DROP TABLE provider');
-        $this->addSql('CREATE TABLE provider (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL COLLATE BINARY, lastname VARCHAR(255) NOT NULL COLLATE BINARY, email VARCHAR(255) NOT NULL COLLATE BINARY, password VARCHAR(255) NOT NULL COLLATE BINARY, token VARCHAR(255) NOT NULL COLLATE BINARY, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, phone INTEGER DEFAULT NULL, status VARCHAR(20) NOT NULL COLLATE BINARY, gender VARCHAR(20) NOT NULL COLLATE BINARY, age INTEGER NOT NULL, price NUMERIC(4, 2) NOT NULL, siret INTEGER DEFAULT NULL, qualification CLOB DEFAULT NULL --(DC2Type:json)
-        , localisation CLOB DEFAULT NULL --(DC2Type:json)
-        , schedule CLOB DEFAULT NULL --(DC2Type:json)
-        )');
-        $this->addSql('INSERT INTO provider (id, name, lastname, email, password, token, created_at, updated_at, qualification, phone, status, gender, age, localisation, price, schedule, siret) SELECT id, name, lastname, email, password, token, created_at, updated_at, qualification, phone, status, gender, age, localisation, price, schedule, siret FROM __temp__provider');
-        $this->addSql('DROP TABLE __temp__provider');
         $this->addSql('DROP INDEX IDX_7BE5E15DA53A8AA');
         $this->addSql('DROP INDEX IDX_7BE5E15DDD62C21B');
         $this->addSql('CREATE TEMPORARY TABLE __temp__provider_child AS SELECT provider_id, child_id FROM provider_child');
@@ -78,6 +76,12 @@ final class Version20190401071639 extends AbstractMigration
         $this->addSql('INSERT INTO child (id, client_id, name, lastname, age, gender, info) SELECT id, client_id, name, lastname, age, gender, info FROM __temp__child');
         $this->addSql('DROP TABLE __temp__child');
         $this->addSql('CREATE INDEX IDX_22B3542919EB6921 ON child (client_id)');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__client AS SELECT id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation FROM client');
+        $this->addSql('DROP TABLE client');
+        $this->addSql('CREATE TABLE client (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, token VARCHAR(255) NOT NULL, updated_at DATETIME DEFAULT NULL, description CLOB DEFAULT NULL, phone INTEGER DEFAULT NULL, localisation CLOB DEFAULT NULL --(DC2Type:json)
+        , name VARCHAR(255) NOT NULL COLLATE BINARY, lastname VARCHAR(255) NOT NULL COLLATE BINARY, created_at DATETIME NOT NULL, gender VARCHAR(20) NOT NULL COLLATE BINARY, age INTEGER NOT NULL)');
+        $this->addSql('INSERT INTO client (id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation) SELECT id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation FROM __temp__client');
+        $this->addSql('DROP TABLE __temp__client');
         $this->addSql('DROP INDEX IDX_9474526C19EB6921');
         $this->addSql('DROP INDEX IDX_9474526CA53A8AA');
         $this->addSql('CREATE TEMPORARY TABLE __temp__comment AS SELECT id, client_id, provider_id, title, article, score FROM comment');
@@ -96,12 +100,6 @@ final class Version20190401071639 extends AbstractMigration
         $this->addSql('DROP TABLE __temp__contact_child');
         $this->addSql('CREATE INDEX IDX_F994426E7A1254A ON contact_child (contact_id)');
         $this->addSql('CREATE INDEX IDX_F994426DD62C21B ON contact_child (child_id)');
-        $this->addSql('CREATE TEMPORARY TABLE __temp__provider AS SELECT id, name, lastname, email, password, token, created_at, updated_at, phone, status, gender, age, price, siret, schedule, qualification, localisation FROM provider');
-        $this->addSql('DROP TABLE provider');
-        $this->addSql('CREATE TABLE provider (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, token VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, phone INTEGER DEFAULT NULL, status VARCHAR(20) NOT NULL, gender VARCHAR(20) NOT NULL, age INTEGER NOT NULL, price NUMERIC(4, 2) NOT NULL, siret INTEGER DEFAULT NULL, schedule VARCHAR(255) NOT NULL COLLATE BINARY, qualification CLOB DEFAULT NULL COLLATE BINARY --(DC2Type:array)
-        , localisation VARCHAR(100) DEFAULT NULL COLLATE BINARY, available VARCHAR(255) NOT NULL COLLATE BINARY)');
-        $this->addSql('INSERT INTO provider (id, name, lastname, email, password, token, created_at, updated_at, phone, status, gender, age, price, siret, schedule, qualification, localisation) SELECT id, name, lastname, email, password, token, created_at, updated_at, phone, status, gender, age, price, siret, schedule, qualification, localisation FROM __temp__provider');
-        $this->addSql('DROP TABLE __temp__provider');
         $this->addSql('DROP INDEX IDX_7BE5E15DA53A8AA');
         $this->addSql('DROP INDEX IDX_7BE5E15DDD62C21B');
         $this->addSql('CREATE TEMPORARY TABLE __temp__provider_child AS SELECT provider_id, child_id FROM provider_child');
