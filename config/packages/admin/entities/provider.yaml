@@ -10,19 +10,17 @@ easy_admin:
           - { property: 'email', label: 'Mail', type: 'string' }
           - { property: 'token', label: 'Token', type: 'string' }
           - { property: 'created_at', label: 'Creation', type: 'datetime' }
-          - { property: 'modified_at', label: 'Modification', type: 'datetime' }
           - { property: 'phone', label: 'Telephone', type: 'string' }
           - { property: 'status', label: 'status', type: 'string' }
           - { property: 'gender', label: 'Sexe', type: 'string' }
           - { property: 'price', label: 'Prix/h', type: 'string' }
           - { property: 'siret', label: 'Num Siret', type: 'integer' }
-          - { property: 'Qualification', label: 'Qualification', type: 'string' }
-          - { property: 'location', label: 'Geoloc', type: 'string' }
-          - { property: 'schedule', label: 'Disponibilite', type: 'string' }
         actions:
           - { name: 'edit', icon: 'pencil', label: false ,  css_class: 'btn btn-secondary' }
           - { name: 'delete', icon: 'trash', label: false , css_class: 'btn btn-danger' }
           - { name: 'new', icon: 'plus', label: false , css_class: 'btn btn-primary' }
+          - { name: 'search', icon: 'search' , label: 'Recherche' }
+
       form:
         fields:
           - { property: 'name', label: 'Prenom' }

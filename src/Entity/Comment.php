@@ -122,6 +122,6 @@ class Comment
 
     public function __toString()
     {
-        return $this->title;
+        return strval($this->id);
     }
 }
