@@ -39,7 +39,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("clients/{email}/{password}", name="register")
+     * @Route("clients/{email}/{password}", name="clientRegister")
      * @param $email
      * @param $password
      * @return Response
@@ -60,15 +60,26 @@ class ClientController extends AbstractController
         return new Response('Saved new client with id '.$client->getId());
     }
 
-    public function login(AuthenticationUtils $authenticationUtils)
+    /**
+     * @Route("clients/login{email}/{password}", name="clientLogin")
+     * @param $email
+     * @param $password
+     * @return Response
+     */
+    public function login($email, $password)
     {
-//        // get the login error if there is one
-//        $error = $authenticationUtils->getLastAuthenticationError();
-//        // last username entered by the user
-//        $lastUsername = $authenticationUtils->getLastUsername();
-//        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        $entityManager = $this->getDoctrine()->getManager();
 
+        $client = new Client();
+        $client->getEmail();
+        $client->setPassword($this->passwordEncoder->encodePassword($client, $password));
+        $client->setToken($this->generateRandomString(255));
+        $client->setCreatedAt($this->generateInstantDate());
 
+        $entityManager->persist($client);
+        $entityManager->flush();
+
+        return new Response('Saved new client with id '.$client->getId());
     }
 
 

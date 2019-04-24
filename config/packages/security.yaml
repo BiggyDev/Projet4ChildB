@@ -3,6 +3,9 @@ security:
         App\Entity\Client:
             algorithm: bcrypt
             cost: 12
+        App\Entity\Provider:
+            algorithm: bcrypt
+            cost: 12
 
     providers:
         entity_provider:
