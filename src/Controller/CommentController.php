@@ -75,7 +75,7 @@ class CommentController extends AbstractController
      */
     public function showCommentProvider($id, $idProvider)
     {
-        $comment = $this_>getDoctrine()
+        $comment = $this->getDoctrine()
             ->getRepository(Comment::class)
             ->find($id, $idProvider);
 
@@ -83,10 +83,10 @@ class CommentController extends AbstractController
             throw $this->createNotFoundException(
                 'Aucun commentaire trouvé'
             );}
-        $comment = $this->get('serializer')->serialize($profil, 'json');
+        $comment = $this->get('serializer')->serialize($comment, 'json');
 
         $response = new Response($comment);
-        $response->headers->set('Content-Type', 'applicaton/json')
+        $response->headers->set('Content-Type', 'applicaton/json');
     }
 
     /**
@@ -144,7 +144,7 @@ class CommentController extends AbstractController
      */
     public function showCommentClient($id, $idClient)
     {
-        $comment = $this_>getDoctrine()
+        $comment = $this->getDoctrine()
                 ->getRepository(Comment::class)
                 ->find($id, $idClient);
 
@@ -153,9 +153,9 @@ class CommentController extends AbstractController
                 'Aucun commentaire trouvé'
             );}
 
-        $comment = $this->get('serializer')->serialize($profil, 'json');
+        $comment = $this->get('serializer')->serialize($comment, 'json');
         $response = new Response($comment);
-        $response->headers->set('Content-Type', 'applicaton/json')
+        $response->headers->set('Content-Type', 'applicaton/json');
     }
 
     /**
