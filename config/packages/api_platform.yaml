@@ -4,7 +4,11 @@ parameters:
 
 api_platform:
     mapping:
+<<<<<<< HEAD
         paths: ['%kernel.project_dir%/src/Entity'], ['%kernel.project_dir%/src/Model']
         elasticsearch:
           hosts: ['%env(ELASTICSEARCH_HOST)%']
+=======
+        paths: ['%kernel.project_dir%/src/Entity', '%kernel.project_dir%/src/Document']
+>>>>>>> develop
 

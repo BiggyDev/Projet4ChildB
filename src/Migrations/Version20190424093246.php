@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190329155445 extends AbstractMigration
+final class Version20190424093246 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -47,6 +47,14 @@ final class Version20190329155445 extends AbstractMigration
         $this->addSql('DROP TABLE __temp__contact_child');
         $this->addSql('CREATE INDEX IDX_F994426E7A1254A ON contact_child (contact_id)');
         $this->addSql('CREATE INDEX IDX_F994426DD62C21B ON contact_child (child_id)');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__provider AS SELECT id, name, lastname, email, password, token, created_at, updated_at, phone, status, gender, age, price, siret, qualification, localisation, schedule FROM provider');
+        $this->addSql('DROP TABLE provider');
+        $this->addSql('CREATE TABLE provider (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, email VARCHAR(255) NOT NULL COLLATE BINARY, password VARCHAR(255) NOT NULL COLLATE BINARY, token VARCHAR(255) NOT NULL COLLATE BINARY, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, phone INTEGER DEFAULT NULL, siret INTEGER DEFAULT NULL, qualification CLOB DEFAULT NULL COLLATE BINARY --(DC2Type:json)
+        , localisation CLOB DEFAULT NULL COLLATE BINARY --(DC2Type:json)
+        , schedule CLOB DEFAULT NULL COLLATE BINARY --(DC2Type:json)
+        , name VARCHAR(255) DEFAULT NULL, lastname VARCHAR(255) DEFAULT NULL, status VARCHAR(20) DEFAULT NULL, gender VARCHAR(20) DEFAULT NULL, age INTEGER DEFAULT NULL, price NUMERIC(4, 2) DEFAULT NULL)');
+        $this->addSql('INSERT INTO provider (id, name, lastname, email, password, token, created_at, updated_at, phone, status, gender, age, price, siret, qualification, localisation, schedule) SELECT id, name, lastname, email, password, token, created_at, updated_at, phone, status, gender, age, price, siret, qualification, localisation, schedule FROM __temp__provider');
+        $this->addSql('DROP TABLE __temp__provider');
         $this->addSql('DROP INDEX IDX_7BE5E15DDD62C21B');
         $this->addSql('DROP INDEX IDX_7BE5E15DA53A8AA');
         $this->addSql('CREATE TEMPORARY TABLE __temp__provider_child AS SELECT provider_id, child_id FROM provider_child');
@@ -88,6 +96,14 @@ final class Version20190329155445 extends AbstractMigration
         $this->addSql('DROP TABLE __temp__contact_child');
         $this->addSql('CREATE INDEX IDX_F994426E7A1254A ON contact_child (contact_id)');
         $this->addSql('CREATE INDEX IDX_F994426DD62C21B ON contact_child (child_id)');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__provider AS SELECT id, name, lastname, email, password, token, created_at, updated_at, phone, status, gender, age, price, siret, schedule, qualification, localisation FROM provider');
+        $this->addSql('DROP TABLE provider');
+        $this->addSql('CREATE TABLE provider (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, token VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, phone INTEGER DEFAULT NULL, siret INTEGER DEFAULT NULL, schedule CLOB DEFAULT NULL --(DC2Type:json)
+        , qualification CLOB DEFAULT NULL --(DC2Type:json)
+        , localisation CLOB DEFAULT NULL --(DC2Type:json)
+        , name VARCHAR(255) NOT NULL COLLATE BINARY, lastname VARCHAR(255) NOT NULL COLLATE BINARY, status VARCHAR(20) NOT NULL COLLATE BINARY, gender VARCHAR(20) NOT NULL COLLATE BINARY, age INTEGER NOT NULL, price NUMERIC(4, 2) NOT NULL)');
+        $this->addSql('INSERT INTO provider (id, name, lastname, email, password, token, created_at, updated_at, phone, status, gender, age, price, siret, schedule, qualification, localisation) SELECT id, name, lastname, email, password, token, created_at, updated_at, phone, status, gender, age, price, siret, schedule, qualification, localisation FROM __temp__provider');
+        $this->addSql('DROP TABLE __temp__provider');
         $this->addSql('DROP INDEX IDX_7BE5E15DA53A8AA');
         $this->addSql('DROP INDEX IDX_7BE5E15DDD62C21B');
         $this->addSql('CREATE TEMPORARY TABLE __temp__provider_child AS SELECT provider_id, child_id FROM provider_child');
