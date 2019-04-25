@@ -1,0 +1,24 @@
+easy_admin:
+  entities:
+    Comment:
+      class: App\Entity\Comment
+      list:
+        fields:
+          - { property: 'id', label: 'ID Avis', type: 'integer' }
+          - { property: 'title', label: 'Titre', type: 'string'}
+          - { property: 'article', label: 'Article', type: 'string' }
+          - { property: 'score', label: 'Note', type: 'integer' }
+          - { property: 'client', label: 'ID client', type: 'string'}
+          - { property: 'provider', label: 'ID Pro', type: 'string'}
+        actions:
+          - { name: 'new', icon: 'plus', label: false , css_class: 'btn btn-primary' }
+          - { name: 'edit', icon: 'pencil', label: false ,  css_class: 'btn btn-secondary' }
+          - { name: 'delete', icon: 'trash', label: false , css_class: 'btn btn-danger' }
+          - { name: 'search', icon: 'search' , label: 'Recherche' }
+      form:
+        fields:
+          - { property: 'title', label: 'Titre'}
+          - { property: 'article', label: 'Avis'}
+          - { property: 'score', label: 'note' }
+          - { property: 'client', label: 'ID Client'}
+          - { property: 'provider', label: 'ID Pro'}

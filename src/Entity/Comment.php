@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -114,5 +116,12 @@ class Comment
         $this->provider = $provider;
 
         return $this;
+
+
+    }
+
+    public function __toString()
+    {
+        return strval($this->id);
     }
 }

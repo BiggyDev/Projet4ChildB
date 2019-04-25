@@ -324,6 +324,11 @@ class Client implements UserInterface
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function getRoles()
     {
         return ['ROLE_USER'];

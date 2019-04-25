@@ -1,0 +1,38 @@
+easy_admin:
+  entities:
+    Provider:
+      class: App\Entity\Provider
+      list:
+        fields:
+          - { property: 'id', label: 'ID Pro', type: 'integer' }
+          - { property: 'name', label: 'Prenom', type: 'string' }
+          - { property: 'lastname', label: 'Nom', type: 'string' }
+          - { property: 'email', label: 'Mail', type: 'string' }
+          - { property: 'token', label: 'Token', type: 'string' }
+          - { property: 'created_at', label: 'Creation', type: 'datetime' }
+          - { property: 'phone', label: 'Telephone', type: 'string' }
+          - { property: 'status', label: 'status', type: 'string' }
+          - { property: 'gender', label: 'Sexe', type: 'string' }
+          - { property: 'price', label: 'Prix/h', type: 'string' }
+          - { property: 'siret', label: 'Num Siret', type: 'integer' }
+        actions:
+          - { name: 'edit', icon: 'pencil', label: false ,  css_class: 'btn btn-secondary' }
+          - { name: 'delete', icon: 'trash', label: false , css_class: 'btn btn-danger' }
+          - { name: 'new', icon: 'plus', label: false , css_class: 'btn btn-primary' }
+          - { name: 'search', icon: 'search' , label: 'Recherche' }
+
+      form:
+        fields:
+          - { property: 'name', label: 'Prenom' }
+          - { property: 'lastname', label: 'Nom' }
+          - { property: 'email', label: 'Mail'}
+          - { property: 'password', label: 'mdp' }
+          - { property: 'token', label: 'Token' }
+          - { property: 'created_at', label: 'Creation' }
+          - { property: 'updated_at', label: 'Modification' }
+          - { property: 'phone', label: 'Telephone' }
+          - { property: 'status', label: 'status' }
+          - { property: 'gender', label: 'Sexe' }
+          - { property: 'age', label: 'Age' }
+          - { property: 'price', label: 'Prix/h' }
+          - { property: 'siret', label: 'Num Siret' }
