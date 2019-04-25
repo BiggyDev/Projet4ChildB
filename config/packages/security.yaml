@@ -1,18 +1,5 @@
 security:
     encoders:
-<<<<<<< HEAD
-        App\Entity\User:
-            algorithm: bcrypt
-            cost: 12
-
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    providers:
-        # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
-            entity:
-                class: App\Entity\User
-                property: email
-=======
         App\Entity\Client:
             algorithm: bcrypt
             cost: 12
@@ -26,26 +13,10 @@ security:
                 class: App\Entity\Client
                 property: email
 
->>>>>>> develop
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-<<<<<<< HEAD
-        main:
-            anonymous: ~
-            guard:
-                authenticators:
-                    - App\Security\LoginFormAuthenticator
-
-            # activate different ways to authenticate
-#
-#             http_basic: true
-#             http://localhost:3000/#/login
-
-#             form_login: true
-#             http://localhost:3000/#/login
-=======
             stateless: true
 
         login:
@@ -70,7 +41,6 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
->>>>>>> develop
 
     access_control:
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

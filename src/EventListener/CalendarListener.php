@@ -13,8 +13,9 @@ use App\Entity\Provider;
 use App\Repository\ClientRepository;
 use CalendarBundle\Entity\Event;
 use CalendarBundle\Event\CalendarEvent;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class CalendarListener
+class CalendarListener extends AbstractController
 {
     private $clientRepository;
 
@@ -22,7 +23,6 @@ class CalendarListener
         ClientRepository $clientRepository
     ) {
         $this->clientRepository = $clientRepository;
-        $this->router = $router;
 
     }
 
