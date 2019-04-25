@@ -401,7 +401,11 @@
 <<<<<<< HEAD
         "version": "v4.2.5"
 =======
+<<<<<<< HEAD
+        "version": "v4.2.5"
+=======
         "version": "v4.2.4"
+>>>>>>> develop
 >>>>>>> develop
     },
     "symfony/var-exporter": {

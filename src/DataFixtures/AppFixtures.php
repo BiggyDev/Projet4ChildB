@@ -14,6 +14,7 @@ class AppFixtures extends Fixture
     {
         function generateRandomString($length)
         {
+
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $charactersLength = strlen($characters);
             $randomString = '';
@@ -43,5 +44,7 @@ class AppFixtures extends Fixture
             $client->setGender($gender[$result]);
             $manager->persist($client);
         }
+
+        $manager->flush();
     }
 }
