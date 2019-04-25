@@ -1,0 +1,26 @@
+easy_admin:
+  entities:
+    Child:
+      class: App\Entity\Child
+      list:
+        fields:
+          - { property: 'id', label: 'ID Enfant', type: 'integer' }
+          - { property: 'client_id', label: 'ID Parent', type: 'integer' }
+          - { property: 'name', label: 'Prenom', type: 'string' }
+          - { property: 'lastname', label: 'Nom', type: 'string' }
+          - { property: 'age', label: 'Age', type: 'integer' }
+          - { property: 'info', label: 'Info', type: 'string' }
+          - { property: 'gender', label: 'Genre', type: 'string' }
+        actions:
+          - { name: 'edit', icon: 'pencil', label: false ,  css_class: 'btn btn-secondary' }
+          - { name: 'delete', icon: 'trash', label: false , css_class: 'btn btn-danger' }
+          - { name: 'new', icon: 'plus', label: false , css_class: 'btn btn-primary' }
+          - { name: 'search', icon: 'search' , label: 'Recherche' }
+      form:
+        fields:
+          - { property: 'client', label: 'Parent' }
+          - { property: 'name', label: 'Prenom' }
+          - { property: 'lastname', label: 'Nom' }
+          - { property: 'age', label: 'Age' }
+          - { property: 'info', label: 'Info' }
+          - { property: 'gender', label: 'Genre' }

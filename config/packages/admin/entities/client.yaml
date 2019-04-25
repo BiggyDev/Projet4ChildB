@@ -1,0 +1,37 @@
+easy_admin:
+  entities:
+    Client:
+      class: App\Entity\Client
+      list:
+        fields:
+          - { property: 'id', label: 'ID Parent', type: 'integer' }
+          - { property: 'name', label: 'Prenom', type: 'string' }
+          - { property: 'lastname', label: 'Nom', type: 'string' }
+          - { property: 'email', label: 'Mail', type: 'string' }
+          - { property: 'password', label: 'mdp', type: 'string' }
+          - { property: 'created_at', label: 'Creation', type: 'date' }
+          - { property: 'updated_at', label: 'Modification', type: 'date' }
+          - { property: 'description', label: 'Description', type: 'string' }
+          - { property: 'phone', label: 'Telephone', type: 'sting' }
+          - { property: 'gender', label: 'Genre', type: 'string' }
+          - { property: 'age', label: 'Age', type: 'integer' }
+          - { property: 'child', label: 'ID Enfant', type: 'string'}
+        actions:
+          - { name: 'edit', icon: 'pencil', label: false ,  css_class: 'btn btn-secondary' }
+          - { name: 'delete', icon: 'trash', label: false , css_class: 'btn btn-danger' }
+          - { name: 'new', icon: 'plus', label: false , css_class: 'btn btn-primary' }
+          - { name: 'search', icon: 'search' , label: 'Recherche' }
+      form:
+        fields:
+          - { property: 'name', label: 'prenom'}
+          - { property: 'lastname', label: 'Nom'}
+          - { property: 'email', label: 'mail'}
+          - { property: 'token', label: 'token'}
+          - { property: 'password', label: 'mdp'}
+          - { property: 'created_at', label: 'Creation'}
+          - { property: 'updated_at', label: 'Modification'}
+          - { property: 'description', label: 'Description' }
+          - { property: 'phone', label: 'Telephone' }
+          - { property: 'gender', label: 'Genre' }
+          - { property: 'age', label: 'Age' }
+

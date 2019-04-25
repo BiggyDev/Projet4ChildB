@@ -1,0 +1,15 @@
+easy_admin:
+  site_name: 'Nanny Admin'
+  design:
+    menu:
+      - label: 'Particulier'
+        icon: 'users'
+        children:
+          - { entity: 'Client', label: Parent}
+          - { entity: 'Child', label: Enfant}
+          - { entity: 'Contact', label: Contact}
+      - label: 'Professionnel'
+        icon: 'user-md'
+        children:
+          - { entity: 'Provider', label: Pro}
+          - { entity: 'Comment', label: Avis/note}
