@@ -1,3 +1,12 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+search:
+  path: ./client/search
+  controller: App\Controller\SearchController::search
+
+api_login_check:
+    path:     /login_check
+    methods:  POST
+

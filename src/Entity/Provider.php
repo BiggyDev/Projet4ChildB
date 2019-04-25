@@ -7,18 +7,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Location;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ApiResource()
+ * @ORM\Table(name="provider")
  * @ORM\Entity(repositoryClass="App\Repository\ProviderRepository")
  */
-class Provider
+class Provider implements UserInterface
 {
     /**
      * @var int The id of the provider.
      *
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -26,14 +28,14 @@ class Provider
     /**
      * @var string The name of the provider.
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string The last name of the provider.
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
@@ -82,28 +84,28 @@ class Provider
     /**
      * @var string The status of the provider.
      *
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $status;
 
     /**
      * @var string The gender of the provider.
      *
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $gender;
 
     /**
      * @var int The age of the provider.
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $age;
 
     /**
      * @var float The price of the provider.
      *
-     * @ORM\Column(type="decimal", precision=4, scale=2)
+     * @ORM\Column(type="decimal", precision=4, scale=2, nullable=true)
      */
     private $price;
 
@@ -125,11 +127,11 @@ class Provider
     private $child;
 
     /**
-     * @var array The schedule of the provider.
+     * @var string The file name of the schedule of the provider.
      *
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="string")
      */
-    private $schedule = [];
+    private $schedule;
 
     /**
      * @var array The qualifications of the provider.
@@ -312,6 +314,18 @@ class Provider
         return $this;
     }
 
+    public function getSchedule(): ?string
+    {
+        return $this->schedule;
+    }
+
+    public function setSchedule(?string $schedule): self
+    {
+        $this->siret = $schedule;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Comment[]
      */
@@ -368,8 +382,41 @@ class Provider
 
         return $this;
     }
+
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+
     }
 }
