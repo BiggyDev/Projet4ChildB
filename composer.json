@@ -6,20 +6,28 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "^1.6",
+        "alcaeus/mongo-php-adapter": "^1.1",
         "api-platform/api-pack": "^1.2",
+        "doctrine/mongodb-odm": "^2.0.0@beta",
+        "doctrine/mongodb-odm-bundle": "^4.0.0@beta",
+        "lexik/jwt-authentication-bundle": "^2.6",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
         "symfony/http-foundation": "4.2.*",
         "symfony/orm-pack": "^1.0",
+        "symfony/security-bundle": "4.2.*",
         "symfony/yaml": "4.2.*"
     },
     "config": {
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "ext-mongo": "1.6.16"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -64,6 +72,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "symfony/maker-bundle": "^1.11",
         "symfony/var-dumper": "4.2.*",
+        "symfony/profiler-pack": "^1.0",
         "symfony/web-server-bundle": "4.2.*"
     }
 }

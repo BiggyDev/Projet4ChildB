@@ -7,19 +7,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Location;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ApiResource()
+ * @ORM\Table(name="client")
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  * @ORM\Entity(repositoryClass="App\Repository\ProfilClientRepository")
  */
-class Client
+class Client implements UserInterface
 {
     /**
      * @var int The id of the client.
      *
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -27,14 +29,14 @@ class Client
     /**
      * @var string The name of the client.
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string The last name of the client.
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
@@ -62,7 +64,7 @@ class Client
     /**
      * @var \DateTimeInterface Date of registration of the client.
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $created_at;
 
@@ -90,14 +92,14 @@ class Client
     /**
      * @var string The gender of the client.
      *
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $gender;
 
     /**
      * @var int The age of the client
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $age;
 
@@ -323,4 +325,35 @@ class Client
         return $this;
     }
 
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+
+    }
 }

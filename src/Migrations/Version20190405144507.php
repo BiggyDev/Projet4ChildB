@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190401073450 extends AbstractMigration
+final class Version20190405144507 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -29,11 +29,11 @@ final class Version20190401073450 extends AbstractMigration
         $this->addSql('INSERT INTO child (id, client_id, name, lastname, age, info, gender) SELECT id, client_id, name, lastname, age, info, gender FROM __temp__child');
         $this->addSql('DROP TABLE __temp__child');
         $this->addSql('CREATE INDEX IDX_22B3542919EB6921 ON child (client_id)');
-        $this->addSql('CREATE TEMPORARY TABLE __temp__client AS SELECT id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation FROM client');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__client AS SELECT id, password, token, updated_at, description, phone, localisation, name, lastname, created_at, gender, age, username FROM client');
         $this->addSql('DROP TABLE client');
-        $this->addSql('CREATE TABLE client (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL COLLATE BINARY, lastname VARCHAR(255) NOT NULL COLLATE BINARY, email VARCHAR(255) NOT NULL COLLATE BINARY, password VARCHAR(255) NOT NULL COLLATE BINARY, token VARCHAR(255) NOT NULL COLLATE BINARY, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, description CLOB DEFAULT NULL COLLATE BINARY, phone INTEGER DEFAULT NULL, gender VARCHAR(20) NOT NULL COLLATE BINARY, age INTEGER NOT NULL, localisation CLOB DEFAULT NULL COLLATE BINARY --(DC2Type:json)
-        )');
-        $this->addSql('INSERT INTO client (id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation) SELECT id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation FROM __temp__client');
+        $this->addSql('CREATE TABLE client (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, password VARCHAR(255) NOT NULL COLLATE BINARY, token VARCHAR(255) NOT NULL COLLATE BINARY, updated_at DATETIME DEFAULT NULL, description CLOB DEFAULT NULL COLLATE BINARY, phone INTEGER DEFAULT NULL, localisation CLOB DEFAULT NULL COLLATE BINARY --(DC2Type:json)
+        , name VARCHAR(255) DEFAULT NULL COLLATE BINARY, lastname VARCHAR(255) DEFAULT NULL COLLATE BINARY, created_at DATETIME DEFAULT NULL, gender VARCHAR(20) DEFAULT NULL COLLATE BINARY, age INTEGER DEFAULT NULL, email VARCHAR(255) NOT NULL)');
+        $this->addSql('INSERT INTO client (id, password, token, updated_at, description, phone, localisation, name, lastname, created_at, gender, age, email) SELECT id, password, token, updated_at, description, phone, localisation, name, lastname, created_at, gender, age, username FROM __temp__client');
         $this->addSql('DROP TABLE __temp__client');
         $this->addSql('DROP INDEX IDX_9474526CA53A8AA');
         $this->addSql('DROP INDEX IDX_9474526C19EB6921');
@@ -76,7 +76,12 @@ final class Version20190401073450 extends AbstractMigration
         $this->addSql('INSERT INTO child (id, client_id, name, lastname, age, gender, info) SELECT id, client_id, name, lastname, age, gender, info FROM __temp__child');
         $this->addSql('DROP TABLE __temp__child');
         $this->addSql('CREATE INDEX IDX_22B3542919EB6921 ON child (client_id)');
-        $this->addSql('ALTER TABLE client ADD COLUMN status VARCHAR(20) NOT NULL COLLATE BINARY');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__client AS SELECT id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation FROM client');
+        $this->addSql('DROP TABLE client');
+        $this->addSql('CREATE TABLE client (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) DEFAULT NULL, lastname VARCHAR(255) DEFAULT NULL, password VARCHAR(255) NOT NULL, token VARCHAR(255) NOT NULL, created_at DATETIME DEFAULT NULL, updated_at DATETIME DEFAULT NULL, description CLOB DEFAULT NULL, phone INTEGER DEFAULT NULL, gender VARCHAR(20) DEFAULT NULL, age INTEGER DEFAULT NULL, localisation CLOB DEFAULT NULL --(DC2Type:json)
+        , username VARCHAR(255) NOT NULL COLLATE BINARY)');
+        $this->addSql('INSERT INTO client (id, name, lastname, username, password, token, created_at, updated_at, description, phone, gender, age, localisation) SELECT id, name, lastname, email, password, token, created_at, updated_at, description, phone, gender, age, localisation FROM __temp__client');
+        $this->addSql('DROP TABLE __temp__client');
         $this->addSql('DROP INDEX IDX_9474526C19EB6921');
         $this->addSql('DROP INDEX IDX_9474526CA53A8AA');
         $this->addSql('CREATE TEMPORARY TABLE __temp__comment AS SELECT id, client_id, provider_id, title, article, score FROM comment');
